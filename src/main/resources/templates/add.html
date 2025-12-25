@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加学生 - 学生管理系统</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .card-header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 20px;
+        }
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border: none;
+            padding: 12px 40px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        .btn-back {
+            background: #6c757d;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 25px;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4 class="mb-0"><i class="bi bi-person-plus-fill me-2"></i>添加学生</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form th:action="@{/add}" method="post">
+                            <div class="mb-4">
+                                <label for="id" class="form-label">
+                                    <i class="bi bi-hash me-1"></i>学号
+                                </label>
+                                <input type="number" class="form-control" id="id" name="id"
+                                       placeholder="请输入学号" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="name" class="form-label">
+                                    <i class="bi bi-person me-1"></i>姓名
+                                </label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                       placeholder="请输入姓名" required>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/}" class="btn btn-back text-white">
+                                    <i class="bi bi-arrow-left me-1"></i>返回
+                                </a>
+                                <button type="submit" class="btn btn-submit text-white">
+                                    <i class="bi bi-check-lg me-1"></i>提交
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

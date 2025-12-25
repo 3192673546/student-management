@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function queryData() {
+            // 发送 AJAX 请求
+            $.ajax({
+                url: 'http://localhost:8082/querystu',
+                type: 'GET',
+                dataType: 'json',
+                success(res){
+                    var html='';
+                    for(var i =0;i<res.length;i++)
+                    {
+                        html+='<tr><td>'+res[i].id+'</td>'+'<td>'+res[i].name+'</td><td> <button onclick="del('+res[i].id+')">删除</button></td></tr>';
+                    }
+                    console.log(html);
+                    $('#tt').html(html);
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // 处理错误情况
+                }
+            });
+        }
+        function add(){
+
+            const id=document.getElementById('InputId').value;
+            const name=document.getElementById('InputName').value;
+            $.ajax({
+                url: `http://localhost:8082/addstu?id=${id}&name=${name}`,
+                type: 'post',
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res); // 将响应数据输出到控制台
+                    queryData()
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // 处理错误情况
+                }
+            });
+            document.getElementById('InputId').value='',
+                document.getElementById('InputName').value=''
+        }
+        function upd(Id,Name){
+            const id=document.getElementById('InputupdId').value;
+            const name=document.getElementById('InputupdName').value;
+            $.ajax({
+                url: `http://localhost:8082/updstu?id=${id}&name=${name}`,
+                type: 'post',
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res); // 将响应数据输出到控制台
+                    queryData()
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // 处理错误情况
+                }
+            });
+            document.getElementById('InputupdId').value='',
+                document.getElementById('InputupdName').value=''
+        }
+        function del(Id){
+            // const id=document.getElementById('InputdelId').value;
+            const id=Id;
+            $.ajax({
+                url: `http://localhost:8082/delstu?id=${id}`,
+                type: 'post',
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res); // 将响应数据输出到控制台
+                    queryData()
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // 处理错误情况
+                }
+            });
+        }
+        queryData()
+    </script>
+</head>
+<body>
+<!--<button onclick="queryData()">查询</button>-->
+<div>
+    <input type="text" value="" placeholder="请输入id" id="InputId"/>
+    <input type="text" value="" placeholder="请输入名称" id="InputName">
+    <button onclick="add()">添加</button>
+</div>
+<div>
+    <input type="text" value="" placeholder="请输入id" id="InputupdId"/>
+    <input type="text" value="" placeholder="请输入名称" id="InputupdName">
+    <button onclick="upd()">修改</button>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>学生Id</th>
+        <th>学生名称</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody id="tt">
+    </tbody>
+</table>
+</body>
+<style>
+    table{
+        margin:20px;
+        border-collapse: collapse;
+    }
+    th{
+        background-color: #cccccc;
+    }
+    tr{
+        text-align: center;
+        border: 1px solid #ccc;
+    }
+    td{
+        padding:20px;
+        border:1px solid #ccc;
+    }
+    button{
+        background-color: white;
+        width:70px;
+        border-radius:20px;
+        border:1px solid #ccc;
+    }
+    button :hover{
+        background-color: #cccccc;
+    }
+</style>
+</html>

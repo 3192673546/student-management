@@ -1,4 +1,4 @@
-# Student Management System
+# 🎓 学生管理系统 / Student Management System
 
 > 基于 Spring Boot + MyBatis + Thymeleaf 的学生信息管理系统
 
